@@ -1,0 +1,105 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>emojisafe</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="apple-touch-icon" href="icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <style>
+            html {
+                box-sizing: border-box;
+            }
+            *, *:before, *:after {
+                box-sizing: inherit;
+            }
+            /*
+                colors: #F6BE74, #CD777F, #A36F81, #655D77, #495C78
+             */
+            body {
+                background-color: #495C78;
+                color: #F6BE74;
+                font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+                font-weight: 300;
+                margin: 0;
+            }
+            main {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+            }
+            form {
+                background-color: #655D77;
+                border-radius: 10px;
+                padding: 1em 2em;
+            }
+            input {
+                background-color: rgba(255,255,255,.8);
+                border: .25em solid #A36F81;
+                border-radius: 10px;
+                font-size: 2em;
+                padding: .25em;
+                text-align: center;
+                width: 3em;
+            }
+            input:focus {
+                outline: none;
+                border-color: #CD777F;
+            }
+            .unsafe {
+                background-color: red;
+            }
+            .safe {
+                background-color: green;
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+        <main>
+            <h1>emojisafe</h1>
+            <form id="emojiform">
+                <label>
+                    <input name="emoji" />
+                </label>
+            </form>
+            <p>paste emoji above</p>
+        </main>
+        <script src="index.js" type="text/javascript"></script>
+        <script>
+            window.addEventListener("DOMContentLoaded", () => {
+                const form = document.querySelector("#emojiform");
+                const input = form.emoji;
+
+
+                form.addEventListener("submit", preventSubmit, false);
+                input.addEventListener("keydown", preventSubmit, false);
+
+                input.addEventListener("input", () => {
+                    if (window.isEmojiSafe(input.value)) {
+                        form.classList.remove('unsafe');
+                        form.classList.add('safe');
+                    } else {
+                        form.classList.remove('safe');
+                        form.classList.add('unsafe');
+                    }
+                }, false);
+            }, false);
+
+            function preventSubmit(evt) {
+                if (evt.type === "keydown" && evt.key === "Enter") {
+                    evt.preventDefault();
+                }
+            }
+        </script>
+    </body>
+</html>
