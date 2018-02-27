@@ -1,9 +1,9 @@
-const unsafeEmojiList = require('./unsafe-emoji-list.js');
+const unsafeEmojiList = require('./unsafe-emoji-list');
 
 function getEmojiCode(emoji) {
-  return emoji.codePointAt(0).toString(16);
+  return emoji.codePointAt(0).toString(16).toUpperCase();
 }
 
-module.exports = function canIUse(emoji) {
-  return (emoji.length <= 2) && !unsafeEmojiList.contains(getEmojiCode(emoji));
+module.exports = function isEmojiSafe(emoji) {
+  return (emoji.length <= 2) && !unsafeEmojiList.includes(getEmojiCode(emoji));
 };
