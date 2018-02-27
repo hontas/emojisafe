@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "tdd": "npm t -- --watch"
+    "tdd": "npm t -- --watch",
+    "deploy": "gh-pages --dist '.' --src '{index,icon}.{html,js,png}'"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "gh-pages": "^1.1.0",
     "jest": "^22.4.2"
   }
 }
